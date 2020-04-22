@@ -19,6 +19,12 @@ namespace OdeToFoodData.Services
             };
         }
 
+        public void Add(Restaurant restaurant)
+        {
+            restaurant.Id = restaurants.Max(i => i.Id) + 1;
+            restaurants.Add(restaurant);
+        }
+
         public Restaurant Get(int id)
         {
             return restaurants.FirstOrDefault(r => r.Id == id);
@@ -27,6 +33,16 @@ namespace OdeToFoodData.Services
         public IEnumerable<Restaurant> GetAll()
         {
             return restaurants.OrderBy(r => r.Name);
+        }
+
+        public void Update(Restaurant restaurant)
+        {
+            var existing = Get(restaurant.Id);
+            if(existing!= null)
+            {
+                existing.Name = restaurant.Name;
+                existing.Cuisine = restaurant.Cuisine;
+            }
         }
     }
 }
