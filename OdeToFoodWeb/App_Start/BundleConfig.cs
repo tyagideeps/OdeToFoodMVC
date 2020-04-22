@@ -23,7 +23,7 @@ namespace OdeToFoodWeb
                       "~/Scripts/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
+                      "~/Content/bootstrap_yeti.css",
                       "~/Content/site.css"));
         }
     }
