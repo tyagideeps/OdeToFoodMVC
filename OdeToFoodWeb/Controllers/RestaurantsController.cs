@@ -49,7 +49,7 @@ namespace OdeToFoodWeb.Controllers
             {
                 return HttpNotFound();
             }
-            return View();
+            return View(model);
         }
 
         //POST
@@ -60,9 +60,10 @@ namespace OdeToFoodWeb.Controllers
             if (ModelState.IsValid)
             {
                 db.Update(restaurant);
+                TempData["Message"] = "You have successfully updated the restaurant!";
                 return RedirectToAction("Details", new { id = restaurant.Id });
             }
-            return View();
+            return View(restaurant);
         }
 
         public ActionResult Details(int id)
@@ -90,7 +91,9 @@ namespace OdeToFoodWeb.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Delete(int id, FormCollection form)
         {
+            var tempName = db.Get(id).Name;
             db.Delete(id);
+            TempData["Message"] = $"You have successfully deleted {tempName}!";
             return RedirectToAction("Index");
             
         }
